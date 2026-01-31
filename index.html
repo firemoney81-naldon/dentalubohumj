@@ -1,23 +1,493 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+ <style>
+    /* 1. 기본 스타일 재설정 */
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.7;
+      color: #333;
+      background: #f4f6f9; /* 부드러운 배경색 */
+    }
+    header, nav, section, footer {
+      padding: 20px;
+      max-width: 1200px;
+      margin: auto;
+      background: #fff;
+      margin-bottom: 20px;
+      border-radius: 10px; /* 둥근 모서리 */
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08); /* 부드러운 그림자 */
+    }
+    /* 2. 헤더 스타일 */
+    header {
+      padding: 30px 20px;
+      background: linear-gradient(135deg, #f0f8ff, #e0f0ff); /* 부드러운 그라데이션 배경 */
+      border-bottom: 5px solid #2a6db1; /* 강조색 */
+      text-align: center;
+    }
+    header h1 {
+      margin-top: 0;
+      font-size: 2.2rem;
+      color: #004a8f; /* 전문적인 느낌의 딥블루 */
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    header p {
+      font-size: 1.1rem;
+      color: #555;
+    }
+    header strong {
+      color: #2a6db1;
+      font-weight: 700;
+    }
+    /* 3. 내비게이션 스타일 */
+    nav {
+      background: #2a6db1; /* 주 강조색 */
+      border-radius: 10px;
+      text-align: center;
+      padding: 15px 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    nav a {
+      color: #fff;
+      margin: 0 18px;
+      font-weight: 500;
+      text-decoration: none;
+      font-size: 1.05rem;
+      transition: all 0.3s;
+      display: inline-block;
+      padding: 5px 0;
+    }
+    nav a:hover {
+      opacity: 0.9;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      text-decoration: underline;
+    }
+    /* 4. 섹션 타이틀 스타일 */
+    h2 {
+      border-bottom: 3px solid #2a6db1;
+      padding-bottom: 8px;
+      margin-bottom: 25px;
+      color: #004a8f;
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+    h3 {
+      color: #333;
+      font-size: 1.4rem;
+      margin-top: 25px;
+      margin-bottom: 15px;
+      border-left: 4px solid #2a6db1;
+      padding-left: 10px;
+    }
+    /* 5. CTA 버튼 스타일 */
+    .cta {
+      display: inline-block;
+      background-color: #2a6db1;
+      color: white;
+      padding: 18px 40px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1.15rem;
+      text-decoration: none;
+      transition: background-color 0.3s ease, transform 0.2s;
+      margin-top: 20px;
+      box-shadow: 0 4px 10px rgba(0, 74, 143, 0.3);
+    }
+    .cta:hover {
+      background-color: #1a568c;
+      transform: translateY(-2px);
+    }
+    /* 6. 카드 스타일 (서비스/사례) */
+    .서비스_카드, .사례_카드 {
+      border: 1px solid #e0e0e0;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      background: #fafafa; /* 밝은 배경 */
+      transition: box-shadow 0.3s, background 0.3s;
+    }
+    .서비스_카드:hover, .사례_카드:hover {
+      box-shadow: 0 6px 18px rgba(42, 109, 177, 0.2);
+      background: #ffffff;
+    }
+    /* 7. 폼 스타일 */
+    form label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #444;
+      font-size: 1rem;
+    }
+    form input[type="text"], form input[type="tel"], form select, form input[type="number"] {
+      width: calc(100% - 20px); /* 100%에서 패딩만큼 제외 */
+      padding: 12px 10px;
+      margin-top: 4px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      box-sizing: border-box; /* 패딩이 너비에 포함되도록 */
+    }
+    form button {
+      margin-top: 20px;
+      width: 100%;
+      cursor: pointer;
+      border: none;
+      padding: 15px;
+      font-size: 1.1rem;
+      background-color: #2a6db1;
+      color: white;
+      border-radius: 6px;
+    }
+    form button:hover {
+      background-color: #1a568c;
+    }
+    /* 8. FAQ 스타일 */
+    dl.faq dt {
+      font-weight: 700;
+      margin-top: 20px;
+      cursor: pointer;
+      color: #2a6db1;
+      background-color: #f0f8ff;
+      padding: 15px;
+      border-radius: 6px;
+      transition: background-color 0.3s;
+    }
+    dl.faq dt:hover {
+      background-color: #e0f0ff;
+    }
+    dl.faq dd {
+      margin-left: 15px;
+      margin-top: 10px;
+      padding-bottom: 15px;
+      border-bottom: 1px dotted #ccc;
+      line-height: 1.7;
+    }
+    /* 9. 테이블 스타일 */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      font-size: 0.95rem;
+    }
+    table th, table td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+    }
+    table th {
+      background-color: #f7f7f7;
+      color: #333;
+      font-weight: 600;
+    }
+    table tr:nth-child(even) {
+      background-color: #fefefe;
+    }
+    table tr:hover {
+      background-color: #f0f8ff;
+    }
+    /* 10. 외부 링크 스타일 */
+    .external-link {
+      color: #007bff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    .external-link:hover {
+      text-decoration: underline;
+      color: #0056b3;
+    }
+    /* 11. 레이아웃 관련 CSS (2단 구성) */
+    .content-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    .main-content {
+        flex: 3;
+    }
+    .sidebar {
+        flex: 1;
+        background: #fcfcfc;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    @media (min-width: 900px) {
+        .content-wrapper {
+            flex-direction: row;
+        }
+    }
+    /* 12. 텍스트 강조 */
+    .highlight {
+      background-color: #fff2e6;
+      padding: 3px 5px;
+      border-radius: 3px;
+      font-weight: 600;
+    }
+  </style>
+
+  <!-- JSON-LD Schema for FinancialService & OfferCatalog -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FinancialService",
+    "name": "인레이보험 가입 비교 센터",
+    "image": "https://www.yourdomain.kr/images/logo-inlay-insurance.png",
+    "telephone": "010-1234-5678",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "서울 강남구 테헤란로 123",
+      "addressLocality": "서울시",
+      "addressRegion": "서울특별시",
+      "postalCode": "06123",
+      "addressCountry": "KR"
+    },
+    "url": "https://www.yourdomain.kr/",
+    "openingHours": "Mo-Fr 09:00-18:00",
+    "areaServed": {
+      "@type": "AdministrativeArea",
+      "name": "전국"
+    },
+    "serviceType": "치과보험",
+    "description": "2026년 최신 인레이보험 가격 비교 및 가입 안내. 내돈내산 후기와 인레이보험 순위 정보 제공.",
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "인레이보험 상품",
+      "itemListElement": [
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "인레이보험"}, "description": "인레이 치료 보장 전문"},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "임플란트보험"}, "description": "고가 임플란트 보장"},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "크라운보험"}, "description": "크라운 치료 보장"},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "치과보험 비교견적"}, "description": "인레이보험 싼곳 추천"}
+      ]
+    }
+  }
+  </script>
+</head>
+<body>
+
+<header id="상단">
+  <h1>인레이보험 가입 순위 | 2026년 최신 가격 비교 및 장점 단점 분석</h1>
+  <p><strong>인레이, 임플란트, 크라운</strong> 등 비급여 치과 치료 비용 부담, <br><strong>인레이보험</strong>으로 현명하게 대비하세요! <br><strong>2026년 최신 인레이보험 가격 비교</strong> 및 <strong>내돈내산 후기</strong>를 통해 가장 저렴한 곳을 추천해드립니다.</p>
+  <a href="#무료견적신청" class="cta">무료 견적 신청 및 1:1 상담</a>
+</header>
+
+<nav>
+  <a href="#상품소개">상품 소개</a>
+  <a href="#비교분석">가격 및 보장 비교</a>
+  <a href="#가입절차">가입 절차</a>
+  <a href="#고객후기">고객 후기</a>
+  <a href="#무료견적신청">무료 견적 신청</a>
+  <a href="#자주묻는질문">FAQ</a>
+</nav>
+
+<div class="content-wrapper">
+  <main class="main-content">
+
+    <section id="상품소개" aria-label="인레이보험 상품 소개">
+      <h2>인레이보험, 왜 필요하며 무엇을 보장하는가?</h2>
+      <p>치과 치료는 건강보험 적용이 되지 않는 비급여 항목이 많아 치료 시 <strong>고액의 비용</strong>이 발생합니다. 특히 충치가 심해져 신경치료를 동반하거나 치아를 보존하기 위한 <strong>인레이(Inlay)</strong> 치료는 환자에게 큰 경제적 부담으로 다가옵니다. 인레이보험은 이러한 치과 치료의 비급여 항목에 대한 보장을 목적으로 하는 보험 상품입니다. 2026년 기준, 인레이보험 상품의 종류와 <strong>인레이보험 가격</strong>은 다양하며, 개인의 치아 상태와 가입 조건에 따라 보장 내용이 크게 달라질 수 있습니다.</p>
+
+      <h3>인레이(Inlay)란 무엇이며, 보험 보장 범위는?</h3>
+      <p>인레이는 충치가 심하지 않아 치아의 일부분만 손상되었을 때, 손상된 부분을 제거하고 그 형태를 본뜬 금속이나 세라믹 재료로 채워 넣는 보철 치료를 말합니다. <span class="highlight">인레이 치료는 보통 1개당 20만원에서 50만원 이상의 비용이 발생</span>하며, 이는 치과마다 다르고 사용되는 재료(금, 세라믹, 레진 등)에 따라 <strong>인레이 비용</strong>이 달라집니다. 인레이보험은 이러한 인레이 치료 비용을 보장해주며, 상품에 따라 <strong>임플란트, 크라운</strong> 등의 고가 치료까지 함께 보장하는 경우가 많습니다.</p>
+
+      <h3>인레이보험의 주요 보장 내용 (2026년 기준)</h3>
+      <div class="서비스_카드">
+        <h4>1. 비급여 보철 치료 보장</h4>
+        <p>인레이보험의 핵심은 인레이, 온레이(Onlay), 크라운, 임플란트, 브릿지 등 비급여 보철 치료 비용을 보장하는 것입니다. 특히 인레이 치료는 충치가 심해지기 전에 예방적으로 진행하는 경우가 많기 때문에, 가입 후 <strong>면책기간 및 감액기간</strong>을 확인하는 것이 중요합니다. 인레이보험은 치과 치료의 <strong>평균 금액</strong>을 낮추는 데 큰 도움을 줍니다.</p>
+      </div>
+      <div class="서비스_카드">
+        <h4>2. 보존 치료 보장</h4>
+        <p>보존 치료는 충치 치료와 같이 치아를 보존하기 위한 치료를 말합니다. 아말감, 레진 치료 등이 여기에 속합니다. 인레이보험은 보철 치료 외에도 이러한 보존 치료에 대한 보장을 함께 제공하는 경우가 많아 치과 치료 전반에 대한 대비가 가능합니다. <strong>인레이보험 싼곳</strong>을 찾을 때 보존 치료 보장까지 함께 확인하는 것이 좋습니다.</p>
+      </div>
+      <div class="서비스_카드">
+        <h4>3. 치과 검진 및 스케일링 보장 (특약)</h4>
+        <p>일부 인레이보험 상품은 정기적인 치과 검진과 스케일링 비용을 보장하는 특약을 제공합니다. 이는 치과 질환의 조기 발견과 예방에 도움이 됩니다. <strong>인레이보험 장점</strong> 중 하나는 예방 치료부터 고가 치료까지 포괄적으로 대비할 수 있다는 점입니다.</p>
+      </div>
+    </section>
+
+    <section id="비교분석" aria-label="인레이보험 가격 및 보장 비교">
+      <h2>2026년 인레이보험 순위: 가격과 보장 범위 비교 분석</h2>
+      <p>수많은 보험사에서 다양한 인레이보험 상품을 출시하고 있습니다. <strong>인레이보험 추천</strong>을 받기 전에, 자신에게 맞는 상품을 찾기 위해서는 <strong>인레이보험 가격</strong>과 <strong>보장 금액</strong>을 꼼꼼히 비교해야 합니다. 특히 <span class="highlight">치과보험은 면책기간과 감액기간이 존재</span>하므로, 당장의 치료 계획이 있다면 가입 시기를 신중하게 결정해야 합니다. 또한, <strong>인레이보험 가입</strong> 시 <strong>평균 금액</strong>과 <strong>예상 비용</strong>을 고려하여 월 보험료를 책정하는 것이 중요합니다.</p>
+
+      <h3>인레이보험 가격 비교표: 보장 금액 및 월 보험료 예시</h3>
+      <p>다음은 2026년 현재 시장에서 인기 있는 주요 인레이보험 상품들의 대략적인 비교표입니다. (가입자의 나이, 성별, 건강 상태에 따라 <strong>인레이보험 금액</strong>은 달라질 수 있습니다.)</p>
+      <table>
+        <thead>
+          <tr>
+            <th>구분</th>
+            <th>A 보험사 (가성비형)</th>
+            <th>B 보험사 (프리미엄형)</th>
+            <th>C 보험사 (간편 심사형)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>월 보험료 (40대 남성 기준)</strong></td>
+            <td>약 3만원대</td>
+            <td>약 5만원대</td>
+            <td>약 4만원대</td>
+          </tr>
+          <tr>
+            <td><strong>인레이 보장 금액 (1개당)</strong></td>
+            <td>10만원</td>
+            <td>20만원</td>
+            <td>15만원</td>
+          </tr>
+          <tr>
+            <td><strong>임플란트 보장 금액 (1개당)</strong></td>
+            <td>100만원</td>
+            <td>200만원 (무제한)</td>
+            <td>150만원</td>
+          </tr>
+          <tr>
+            <td><strong>가입 심사 조건</strong></td>
+            <td>표준 심사 (최근 1년 이내 치과 치료력 고지)</td>
+            <td>표준 심사 (최근 1년 이내 치과 치료력 고지)</td>
+            <td>간편 심사 (최근 5년 이내 암, 뇌졸중, 심근경색만 고지)</td>
+          </tr>
+          <tr>
+            <td><strong>주요 특징</strong></td>
+            <td>저렴한 보험료, 인레이 보장 특화, <strong>인레이보험 싼곳</strong>으로 인기</td>
+            <td>높은 보장 금액, 임플란트 및 크라운 보장 강화, <strong>치과보험 순위</strong> 상위권</td>
+            <td>치과 치료력이 있어도 가입 용이, <strong>인레이보험 가입</strong> 문턱 낮음</td>
+          </tr>
+        </tbody>
+      </table>
+      <p><strong>인레이보험 비교</strong> 시에는 <strong>보장 금액</strong> 외에도 <strong>보장 횟수(개수 무제한 여부)</strong>, <strong>갱신형/비갱신형 여부</strong>, 그리고 <strong>면책/감액 기간</strong>을 반드시 확인해야 합니다. 특히 <strong>인레이보험 단점</strong> 중 하나는 면책 기간 내에 치료가 필요한 경우 보장을 받을 수 없다는 점입니다.</p>
+
+      <h3>인레이보험 가입 시 고려해야 할 핵심 요소</h3>
+      <h4>1. 면책기간과 감액기간의 차이</h4>
+      <p>대부분의 인레이보험 상품은 가입 후 일정 기간(보통 90일~180일) 동안 보장을 하지 않는 <strong>면책기간</strong>이 있습니다. 면책기간 이후에는 보장을 시작하지만, 1년~2년 동안은 보장 금액의 50%만 지급하는 <strong>감액기간</strong>이 적용될 수 있습니다. <strong>인레이보험 내돈내산 후기</strong>를 보면 이 기간을 제대로 확인하지 않아 불이익을 당하는 사례가 많습니다.</p>
+      <h4>2. 진단형 vs 비진단형 인레이보험</h4>
+      <p>진단형 보험은 가입 시 치과 검진을 받아야 하며 보장 금액이 높은 편입니다. 비진단형 보험은 검진 없이 간편하게 가입이 가능하며, <strong>인레이보험 가입</strong> 시 가장 보편적으로 선택됩니다.</p>
+      <h4>3. 갱신형 vs 비갱신형 인레이보험</h4>
+      <p><strong>갱신형</strong>은 초기 보험료가 저렴하지만 갱신 시마다 보험료가 인상됩니다. <strong>비갱신형</strong>은 초기 보험료가 비싸지만 갱신 없이 납입 기간 동안 동일한 보험료를 유지하므로 장기적으로 볼 때 <strong>인레이보험 저렴한곳</strong>이 될 수 있습니다. <strong>인레이보험 장점</strong>을 극대화하려면 장기적인 관점에서 비갱신형을 고려하는 것이 좋습니다.</p>
+
+      <h3>[전문 정보] 인레이와 온레이, 크라운, 임플란트의 차이점</h3>
+      <p>인레이보험 가입자들은 이 <strong>치과 치료 종류의 차이점</strong>을 정확히 알아야 합니다. <span class="highlight">인레이(Inlay)는 치아의 씹는 면 일부를 덮는 치료</span>이며, <span class="highlight">온레이(Onlay)는 인레이보다 넓은 범위(치아의 씹는 면 전체 또는 측면 일부까지)를 덮는 치료</span>입니다. <span class="highlight">크라운(Crown)은 치아 전체를 완전히 씌우는 치료</span>입니다. 임플란트는 치아를 완전히 상실했을 때 인공 치아를 심는 치료입니다.</p>
+      <p>인레이보험은 보통 인레이와 온레이를 보존 치료로 분류하고 크라운과 임플란트를 보철 치료로 분류하여 보장 금액을 다르게 책정합니다. <strong>인레이보험 금액</strong>을 확인할 때 이 차이를 인지하고 있어야 정확한 <strong>치과보험 비교</strong>가 가능합니다. <strong>인레이보험 순위</strong>가 높은 상품일수록 보철 치료의 보장 한도가 높습니다.</p>
+
+      <h3>함께 많이 찾는 키워드 분석 (Naver 자동완성 및 연관검색어)</h3>
+      <p>네이버 검색 이용자들이 인레이보험과 관련하여 함께 많이 찾는 키워드들을 분석한 결과, 주로 <strong>"치과보험 가입 조건", "인레이 가격", "인레이 비용", "치과보험 싼곳", "내돈내산 치과보험 후기"</strong> 등 가입 조건, 비용, 그리고 실사용 후기에 대한 관심이 높은 것으로 나타났습니다. 특히 <strong>"2026년 치과보험"</strong>처럼 최신 정보를 찾는 경향이 강합니다. 본 페이지에서는 이러한 키워드들을 종합하여 <strong>인레이보험의 장단점</strong>을 상세하게 설명하고 있습니다.</p>
+    </section>
+
+    <section id="가입절차" aria-label="인레이보험 가입 절차">
+      <h2>인레이보험 가입 절차 및 유의사항 (STEP BY STEP)</h2>
+      <ol>
+        <li><a href="#무료견적신청"><strong>무료 견적 신청 및 상담 진행:</strong></a> 고객님의 치아 상태(최근 치료력)와 희망 보장 금액(<strong>인레이보험 금액</strong> 등)을 토대로 전문 상담사와 1:1 상담을 진행합니다.</li>
+        <li><strong>보험 상품 비교 분석:</strong> 가입자의 조건에 맞는 여러 보험사의 <strong>인레이보험 순위</strong> 및 <strong>가격 비교</strong>를 통해 최적의 상품을 추천받습니다. <strong>인레이보험 저렴한곳</strong>을 찾는 것도 중요하지만, 보장 내용을 꼼꼼히 확인해야 합니다.</li>
+        <li><strong>가입 심사 및 계약:</strong> 고지사항(최근 1년 이내 치과 치료력 등)을 확인하고 보험사 심사를 거쳐 계약을 확정합니다. 간편 심사형 상품의 경우 심사가 빠르게 진행됩니다.</li>
+        <li><strong>보험료 납입 및 효력 발생:</strong> 첫 보험료 납입 후 <strong>면책기간 및 감액기간</strong>이 적용되며, 이 기간이 종료된 후 보장이 정상적으로 시작됩니다.</li>
+      </ol>
+      <p>가입 시 <strong>인레이보험 장점</strong>만 보지 않고 <strong>인레이보험 단점</strong>(면책/감액 기간, 가입 시 고지 의무 등)까지 충분히 숙지해야 합니다. <strong>치과보험 내돈내산 후기</strong>를 참고하면 실제 가입자들의 경험담을 통해 팁을 얻을 수 있습니다.</p>
+    </section>
+
+    <section id="고객후기" aria-label="인레이보험 고객 후기 및 사례">
+      <h2>실제 고객 후기 및 인레이보험 내돈내산 사례</h2>
+      <p>실제 <strong>인레이보험 가입</strong>자들의 리얼한 후기를 통해 인레이보험의 효과를 확인해보세요. <strong>인레이보험 순위</strong>가 높은 상품은 고객 만족도가 높습니다.</p>
+      <div class="사례_카드">
+        <h3>사례 1: 인레이 2개 치료 보장 후기 (40대 직장인)</h3>
+        <p>“직장 건강검진에서 충치 2개를 발견했습니다. 인레이 치료가 필요하다는 진단을 받고 <strong>인레이보험 가입</strong>을 문의했습니다. 다행히 가입 후 1년이 지나 감액기간이 끝난 상태였고, 인레이 치료 2개에 대해 총 30만원의 <strong>인레이보험 금액</strong>을 보장받았습니다. <strong>인레이 비용</strong> 부담을 크게 줄일 수 있어 만족합니다.”</p>
+      </div>
+      <div class="사례_카드">
+        <h3>사례 2: 치과 치료력이 있는 50대 주부의 인레이보험 가입 후기</h3>
+        <p>“최근 1년 내 치과 치료력이 있어서 일반 보험 가입이 어려울까 걱정했는데, 상담을 통해 간편 심사형 상품을 추천받았습니다. <strong>인레이보험 추천</strong>을 받아 가입한 덕분에, 추후 발생한 충치 치료에 대한 대비를 할 수 있었습니다. <strong>치과보험 비교</strong>를 통해 가입 문턱이 낮은 상품이 있다는 것을 알게 되었습니다.”</p>
+      </div>
+      <div class="사례_카드">
+        <h3>사례 3: 임플란트 및 인레이 통합 보장 후기 (60대 남성)</h3>
+        <p>“인레이 치료 뿐만 아니라 임플란트도 필요한 상황이었습니다. 보장 금액이 높은 프리미엄 상품을 선택하여 인레이 치료와 임플란트 치료 모두 보장받았습니다. <span class="highlight"><strong>인레이보험 장점</strong>을 제대로 활용한 경우</span>입니다. <strong>인레이보험 가격</strong>은 비쌌지만, 결과적으로 <strong>내돈내산</strong>을 통해 큰 이득을 보았습니다.”</p>
+      </div>
+    </section>
+
+    <section id="외부정보" aria-label="신뢰할 수 있는 외부 정보 링크">
+      <h2>인레이보험 및 치과 치료 관련 외부 신뢰 정보</h2>
+      <p>인레이보험 가입 전, 치과 치료에 대한 정확한 정보와 건강보험 보장 범위를 확인하는 것이 중요합니다. 아래는 치과 치료 및 보험 관련 공인된 정보를 제공하는 외부 사이트입니다.</p>
+      <ul>
+        <li><a class="external-link" href="https://namu.wiki/w/%EC%B9%98%EA%B3%BC%EC%B9%98%EB%A3%8C" target="_blank">나무위키 - 치과 치료 항목 (인레이, 크라운 등)</a></li>
+        <li><a class="external-link" href="https://www.hira.or.kr/" target="_blank">건강보험심사평가원 (HIRA) - 건강보험 치과 보장 범위 확인</a></li>
+        <li><a class="external-link" href="https://www.kfda.go.kr/device/index.do" target="_blank">식품의약품안전처 (KFDA) - 치과 재료 및 의료기기 정보</a></li>
+        <li><a class="external-link" href="https://www.fss.or.kr/fss/main/index.jsp" target="_blank">금융감독원 (FSS) - 금융소비자 정보 포털 (보험 상품 비교)</a></li>
+        <li><a class="external-link" href="https://www.kda.or.kr/" target="_blank">대한치과의사협회 (KDA) - 치과 관련 전문 정보</a></li>
+      </ul>
+    </section>
+
+  </main>
+
+  <aside class="sidebar">
+    <section id="무료견적신청" aria-label="무료 견적 신청 및 상담">
+      <h2>무료 견적 신청 (체류 시간 증진용)</h2>
+      <p><strong>2026년 최신 인레이보험 가격</strong>을 바로 확인해보세요. 고객님의 상황에 맞는 <strong>인레이보험 순위</strong> 및 <strong>인레이보험 저렴한곳</strong>을 추천해드립니다.</p>
+      <form action="/submit-estimate" method="POST" aria-describedby="견적폼설명">
+        <p id="견적폼설명">아래 폼을 작성해주시면 정확한 상담 및 <strong>인레이보험 비용</strong> 견적 안내를 도와드립니다. 최대한 자세히 기입해주세요.</p>
+
+        <label for="연령대">연령대</label>
+        <select id="연령대" name="age_group" required>
+          <option value="">선택하세요</option>
+          <option value="20대">20대</option>
+          <option value="30대">30대</option>
+          <option value="40대">40대</option>
+          <option value="50대">50대</option>
+          <option value="60대 이상">60대 이상</option>
+        </select>
+
+        <label for="희망보험유형">희망 보험 유형</label>
+        <select id="희망보험유형" name="type" required>
+          <option value="">선택하세요</option>
+          <option value="인레이보험 전문">인레이/온레이 보험</option>
+          <option value="임플란트/크라운 통합">임플란트/크라운 통합 보험</option>
+          <option value="간편 심사형">간편 심사형 (유병력자)</option>
+        </select>
+
+        <label for="최근치료력">최근 1년 이내 치과 치료력 유무</label>
+        <select id="최근치료력" name="recent_treatment" required>
+          <option value="없음">없음</option>
+          <option value="있음">있음 (고지 필요)</option>
+        </select>
+
+        <label for="예상치료개수">예상되는 인레이 치료 개수</label>
+        <input type="number" id="예상치료개수" name="expected_inlays" placeholder="예: 2개" required min="0" />
+
+        <label for="월예산">월 보험료 예산 (만원 단위)</label>
+        <input type="number" id="월예산" name="monthly_budget" placeholder="예: 3만원" required min="1" />
+
+        <label for="연락처">연락처</label>
+        <input type="tel" id="연락처" name="phone" placeholder="010-1234-5678" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" required />
+
+        <label for="상담내용">기타 문의사항 (선택)</label>
+        <textarea id="상담내용" name="content" rows="4"></textarea>
+
+        <button type="submit" class="cta">견적 요청하기</button>
+      </form>
+    </section>
+  </aside>
+</div>
+
+<section id="자주묻는질문" aria-label="자주 묻는 질문 FAQ">
+  <h2>자주 묻는 질문 (FAQ)</h2>
+  <dl class="faq">
+    <dt>인레이보험 가입 후 언제부터 보장받을 수 있나요?</dt>
+    <dd>대부분의 인레이보험 상품은 가입일로부터 <strong>면책기간(90일 또는 180일)</strong>이 적용됩니다. 이 기간 동안 발생한 치료에 대해서는 보장이 되지 않습니다. 면책기간 이후에는 <strong>감액기간(1년 또는 2년)</strong>이 적용되어 보장 금액의 50%만 지급될 수 있습니다. <strong>인레이보험 가입</strong> 시 반드시 확인해야 하는 부분입니다.</dd>
+
+    <dt>이미 치과 치료를 받은 적이 있어도 인레이보험 가입이 가능한가요?</dt>
+    <dd>네, 가능합니다. 일반형 인레이보험은 최근 1년 이내 치과 치료력(충치, 인레이, 크라운 등)에 대한 고지 의무가 있습니다. 만약 최근 치료력이 있다면, <strong>간편 심사형 인레이보험</strong>을 선택할 수 있습니다. 간편 심사형은 보험료가 일반형보다 비쌀 수 있지만, 가입 문턱이 낮다는 <strong>장점</strong>이 있습니다.</dd>
+
+    <dt>인레이보험과 일반 건강보험의 치과 보장 차이점은 무엇인가요?</dt>
+    <dd>일반 건강보험은 급여 항목인 스케일링, 충치 치료(아말감, 광중합형 레진 등)만 보장합니다. 반면, <strong>인레이보험</strong>은 건강보험에서 보장하지 않는 비급여 항목인 <strong>인레이, 크라운, 임플란트</strong> 등의 <strong>고액 치료 비용</strong>을 중점적으로 보장합니다. <strong>인레이보험 장점</strong>은 비급여 항목에 대한 <strong>예상 비용</strong>을 절감할 수 있다는 것입니다.</dd>
+
+    <dt>인레이보험의 갱신형과 비갱신형 중 무엇이 더 유리한가요?</dt>
+    <dd><strong>인레이보험 가격</strong>을 기준으로 판단할 때, 단기적인 관점에서는 <strong>갱신형</strong>이 저렴합니다. 하지만 장기적으로 볼 때는 갱신 시마다 보험료가 인상될 수 있으므로, <strong>비갱신형</strong>이 총 납입 <strong>금액</strong> 면에서 유리할 수 있습니다. <strong>인레이보험 추천</strong>을 받을 때 가입 기간과 예상 납입 금액을 비교해봐야 합니다.</dd>
+  </dl>
+</section>
+
+<section id="문의하기" aria-label="문의하기">
+  <h2>문의하기 및 고객센터</h2>
+  <p><strong>인레이보험 가입 순위</strong> 및 <strong>가격 비교</strong> 관련 궁금증을 해결해드립니다.</p>
+  <p><strong>고객센터: 010-1234-5678</strong> | <a href="mailto:info@yourdomain.kr" class="external-link">info@yourdomain.kr</a></p>
+  <p>영업시간: 평일 09:00~18:00 (주말 및 공휴일 휴무)</p>
+</section>
+
+
+  
